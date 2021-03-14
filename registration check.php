@@ -12,9 +12,17 @@
 				else{
 					if($password==$cp)
 					{
-						setcookie('name',$name,time()+3600,'/');
-						setcookie('password',$password,time()+3600,'/');
-						setcookie('email',$email,time()+3600,'/');
+						$userValidationInfo = [
+										 'user' => $name,
+										 'pass' => $password,
+										 'rPass' => $cp,
+										 'email' => $email,
+				      				  ];
+				$allData = json_encode($userValidationInfo);
+				$userData = fopen("userValidationInfo.json", "w");
+				fwrite($userData, $allData);
+				fclose($userData);
+				//header('location: ../view/login.html');
 						header('location: home.html');
 					}
 					else{
